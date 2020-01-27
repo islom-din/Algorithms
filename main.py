@@ -1,8 +1,5 @@
 def main():
-	x = 996
-	print("Проверка простоты числа",x,":",is_simple_number(x))
-	print("Расклад числа",x,"на множители :")
-	factorize_number(x)
+	resheto(20)
 
 def is_simple_number(x):
 	""" Метод грубой силы.
@@ -30,6 +27,23 @@ def factorize_number(x):
 			x //= divisor
 		else:
 			divisor += 1
+
+def resheto(N):
+	"""Алгоритм Решето-Эратосфена для нахождения
+	   простых и составных чисел в пределах от 0 до N.
+	"""
+	A = [True]*N
+	A[0] = A[1] = False
+	for k in range(2,N):
+		if A[k]:
+			for m in range(2*k,N,k):
+				A[m] = False
+	for k in range(N):
+		if A[k]:
+			print(k,"- простое")
+		else:
+			print(k,"- составное")
+
 
 if __name__ == "__main__":
 	main()
