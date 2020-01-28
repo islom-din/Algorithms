@@ -1,8 +1,7 @@
 import sort
 
 def main():
-	resheto(20)
-	A = sort.insert_sort([2,1,8,3,6,5,10,4,1])
+	A = sort.choice_sort([2,1,8,3,6,5,10,4,1])
 	print(A)
 
 def is_simple_number(x):
