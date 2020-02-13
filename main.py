@@ -47,16 +47,20 @@ def resheto(N):
 		else:
 			print(k,"- составное")
 
-def gcd(a,b):
+def gcd1(a,b):
 	"""Алгоритм Евклида для вычисления НОД.
 	"""
 	if a == b:
 		return a
 	elif a > b:
-		return gcd(a - b, b)
+		return gcd1(a - b, b)
 	else: #a < b
-		return gcd(b - a, a)
+		return gcd1(b - a, a)
 
+def gcd2(a,b):
+	"""Расширенный алгоритм Евклида
+	"""
+	return a if b == 0 else gcd2(b, a%b)
 
 if __name__ == "__main__":
 	main()
