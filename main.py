@@ -1,7 +1,7 @@
 import sort
 
 def main():
-	print(pow(2,50000))
+	gen(2)
 
 def is_simple_number(x):
 	""" Метод грубой силы.
@@ -73,6 +73,27 @@ def pow(a:float,n:int):
 		return pow(a**2,n//2)
 	else:
 		return pow(a,n-1)*a
+
+def generate_number(N:int, M:int, prefix=None):
+	"""Генерация всех чисел (с лидирующими незначащими нулями)
+	в N-ричной системе счисления (N <= 10)
+	"""
+	prefix = prefix or []
+	if M == 0:
+		print(prefix)
+		return
+	for digit in range(N):
+		prefix.append(digit)
+		generate_number(N, M-1, prefix)
+		prefix.pop()
+
+#Генерация только для двоичной системы счисления
+def gen(M,prefix=""):
+	if M == 0:
+		print(prefix)
+	else:
+		gen(M-1,prefix + "0")
+		gen(M-1,prefix + "1")
 
 
 if __name__ == "__main__":
