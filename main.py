@@ -1,8 +1,7 @@
 import sort
 
 def main():
-	A = sort.choice_sort([2,1,8,3,6,5,10,4,1])
-	print(A)
+	print(pow(2,50000))
 
 def is_simple_number(x):
 	""" Метод грубой силы.
@@ -49,6 +48,7 @@ def resheto(N):
 
 def gcd1(a,b):
 	"""Алгоритм Евклида для вычисления НОД.
+	(7)
 	"""
 	if a == b:
 		return a
@@ -59,8 +59,21 @@ def gcd1(a,b):
 
 def gcd2(a,b):
 	"""Расширенный алгоритм Евклида
+	(7)
 	"""
 	return a if b == 0 else gcd2(b, a%b)
+
+def pow(a:float,n:int):
+	"""Быстрое возведение в степень
+	(7)
+	"""
+	if n == 0:
+		return 1
+	elif n%2 == 0:
+		return pow(a**2,n//2)
+	else:
+		return pow(a,n-1)*a
+
 
 if __name__ == "__main__":
 	main()
