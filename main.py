@@ -1,7 +1,6 @@
 import sort
 
 def main():
-	gen(2)
 
 def is_simple_number(x):
 	""" Метод грубой силы.
