@@ -122,6 +122,30 @@ def find(number, A):
 			return True
 	return False
 
+#********************************************
+#Алгоритм бинарного поиска. Сложность O(logN)
+def left_bound(A,key):
+	left = -1
+	right = len(A)
+	while right - left > 1:
+		middle = (left + right)//2
+		if A[middle] < key:
+			left = middle
+		else:
+			right = middle
+	return left
+
+def right_bound(A,key):
+	left = -1
+	right = len(A)
+	while right - left > 1:
+		middle = (left + right)//2
+		if A[middle] <= key:
+			left = middle
+		else:
+			right = middle
+	return right	
+#********************************************
 
 if __name__ == "__main__":
 	main()
