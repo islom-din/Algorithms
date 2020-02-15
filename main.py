@@ -95,6 +95,34 @@ def gen(M,prefix=""):
 		gen(M-1,prefix + "0")
 		gen(M-1,prefix + "1")
 
+def generate_permutation(N:int, M:int=-1, prefix=None):
+	"""Генерация всех перестановок N чисел в M позиция,
+	   с префиксом prefix
+	   (8)
+	"""
+	if M == -1:
+		M = N #По умолчанию N чисел в N позициях
+	prefix = prefix or []
+	if M == 0:
+		print(*prefix)
+		return
+	for number in range(1,N+1):
+		if find(number, prefix):
+			continue
+		prefix.append(number)
+		generate_permutation(N,M-1,prefix)
+		prefix.pop()
+
+def find(number, A):
+	"""(Вспомогательная функция для generate_permutation)
+	   Поиск x в A. Вернуть true, если такой есть 
+	   False, если такого нет
+	"""
+	for x in A:
+		if number == x:
+			return True
+	return False
+
 
 if __name__ == "__main__":
 	main()
