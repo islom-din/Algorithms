@@ -39,6 +39,14 @@ def BFS(G):
 		Q.popleft()
 	return L
 
+#Функция для определения наличия индекса key в словаре dict
+def in_dictionary(dict, key):
+      try:
+      	d = dict[key]
+      	return True
+      except LookupError:
+      	return False
+
 
 if __name__ == "__main__":
 	main()
