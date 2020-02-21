@@ -14,8 +14,16 @@ def main():
 	     [0,1,0,0,1,0,0],
 	     [0,0,0,0,1,0,0]]
 	result = BFS(G)
-	print(result)
-	
+	for v, e in result.items():
+		if e == 0 or e >= 5:
+			print("До вершины " + str(v) + " можно добраться через " + str(e) + " рёбер\n")
+			continue
+		elif e == 1:
+			print("До вершины " + str(v) + " можно добраться через " + str(e) + " ребро\n")
+			continue
+		print("До вершины " + str(v) + " можно добраться через " + str(e) + " ребра\n")
+
+		
 #Обход графа в ширину
 def BFS(G):
 	Q = deque()
