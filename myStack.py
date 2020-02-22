@@ -2,7 +2,6 @@
 	Класс myStack описывает классический stack с функциями: 
 	push(element), pop(), top(), isEmpty(), length(), hasElem(element).
 """
-
 class myStack:
 
 	#Создание пустого списка при инициализации объекта исходного класса
@@ -44,3 +43,8 @@ class myStack:
 	def underTop(self):
 		n = len(self.L)
 		return self.L[n-2]
+
+	#Напечатать элементы стека
+	def print_stack(self):
+		for i in self.L:
+			print(i)
