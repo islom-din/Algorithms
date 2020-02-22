@@ -2,7 +2,7 @@
 	Обход графа в глубину. Функция DFS возвращает словарь из пар {ключ:значение}, где ключ - вершина, 
 	а значение это вершина, с которой можно добраться до исходной (той, что в ключе). Входной граф 
 	представляется в виде матрицы смежности. По словарю строится остовное дерево и возвращается 
-	в виде матрицы смежности при помощи функции build_tree(L).
+	в виде списка смежности при помощи функции build_tree(L).
 """
 import myStack
 
@@ -16,7 +16,8 @@ def main():
 		 [1,0,0,0,0,0,0,1],
 		 [1,0,0,0,0,0,1,0]]
 	L = DFS(G)
-	print(L)
+	tree = build_tree(L)
+	print(tree)
 
 #Обход графа в глубину
 def DFS(G):
@@ -38,6 +39,26 @@ def DFS(G):
 				S.pop()
 				i = S.top()
 	return L
+
+#Построение остовного дерева
+def build_tree(L):
+	tmp = []
+	tree = {}
+	for i in range(0,len(L)):
+		for k, v in L.items():
+			if k == 0 and v == 0:
+				continue
+			if k == i:
+				tmp.append(v)
+		for k, v in L.items():
+			if k == 0 and v == 0:
+				continue
+			if v == i:
+				tmp.append(k)
+		tree[i] = tmp
+		tmp = []
+	return tree
+
 
 #Функция нахождение смежных вершин
 def get_adjacent_vertex(G,i,S,L:list):
