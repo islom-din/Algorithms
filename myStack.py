@@ -39,3 +39,8 @@ class myStack:
 			if elem == element:
 				return True
 		return False
+
+    #Вернуть элемент ниже верхнего
+	def underTop(self):
+		n = len(self.L)
+		return self.L[n-2]
