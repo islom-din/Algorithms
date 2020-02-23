@@ -17,8 +17,9 @@ def main():
 		 [0,0,0,0,2,0,0,12,0]]	
 
 	weights = dijkstra(G,0)
-	print(weights)
+	print(recover_way(G,weights,0,8))
 
+#Алгоритм Дейкстры
 def dijkstra(G, start):
 	Q = myDeque.myDeque()
 	weights = {}
@@ -41,6 +42,23 @@ def dijkstra(G, start):
 			L.append(Q.topL())
 		Q.pop()
 	return weights
+
+#Восстановление пути от start до finish
+def recover_way(G, weights, start, finish):
+	way = ""
+	i = finish
+	while i >= 0:
+		if i == start:
+			way += str(i)
+			break
+		for j in range(0,len(G)):
+			if weights[i] - G[i][j] == weights[j]:
+				way += str(i) + " --> "
+				i = j
+				break
+	return way
+
+
 
 #Добавление минимального веса к вершине
 def put_weight(Q,G,weights,i,j):
