@@ -2,51 +2,53 @@
 	Алгоритм Дейкстры для поиска кратчайших путей
 	во взвешанном графе.
 """
-def main():
-	G = read_graph()
-	start = input("С какой вершины начать?")
-	while start not in G:
-		start = input("Такой вершины в графе нет. С какой вершины начать?")
-	shortest_distances = dijkstra(G,start)
-	finish = input("До какой вершины?")
-	while start not in G:
-		start = input("Такой вершины в графе нет. До какой вершины?")
-	shortest_path = reveal_shortes_path(G,start,finish,shortest_distances)
+import myDeque
+import DFS
 
+def main():
+	G = [[0,2,0,0,0,0,0,15,0],
+		 [2,0,1,5,0,0,0,0,0],
+		 [0,1,0,3,0,2,1,0,0],
+		 [0,5,3,0,6,4,0,0,0],
+		 [0,0,0,6,0,7,0,0,2],
+		 [0,0,2,4,7,0,1,3,0],
+		 [0,0,1,0,0,1,0,0,0],
+		 [15,0,0,0,0,3,0,0,12],
+		 [0,0,0,0,2,0,0,12,0]]	
+
+	weights = dijkstra(G,0)
+	print(weights)
 
 def dijkstra(G, start):
-	Q = deque()
-	S = {}
-	S[start] = 0
+	Q = myDeque.myDeque()
+	weights = {}
+	L = []
+
 	Q.push(start)
-	while Q:
-		v = Q.pop()
-		for u in G[v]:
-			if u not in S or S[v] + G[v][u] < S[u]:
-				S[u] = S[v] + G[v][u]
-				Q.push(u)
+	weights[start] = 0
+	for i in range(0,len(G)):
+		if i == start:
+			continue
+		weights[i] = 1000000 #имитация бесконечности
 
+	while Q.length() != 0:
+		i = Q.topL()
+		if not DFS.in_list(L,i):
+			for j in range(0,len(G)):
+				if G[i][j] > 0:
+					Q.push(j)
+					put_weight(Q,G,weights,i,j)
+			L.append(Q.topL())
+		Q.pop()
+	return weights
 
-
-#Считывание графа
-def read_graph():
-	M = int(input()) #количество рёбер
-	G = {}
-	for i in range(M):
-		a, b, weight = input().split()
-		weight = float(weight)
-		add_edge(G, a, b, weight)
-		add_edge(G, b, a, weight)
-	return G
-
-#Добавление ребра в исходный граф
-def add_edge(G, a, b, weight):
-	if a not in G:
-		G[a] = {b: weight}
-	else:
-		G[a][b] = weight
-	
-
+#Добавление минимального веса к вершине
+def put_weight(Q,G,weights,i,j):
+	n1 = weights[Q.topR()]
+	n2 = weights[Q.topL()]
+	n2 += G[i][j]
+	if n2 < n1:
+		weights[Q.topR()] = n2
 
 if __name__ == "__main__":
 	main()
