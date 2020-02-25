@@ -11,8 +11,36 @@ def main():
 	     [1,0,7,0,15,0],
 	     [4,3,0,15,0,0],
 	     [0,0,2,0,0,0]]
+
+	kraskal(G)
+
+def kraskal(G):
+	Tree = {}
+	levels = {}
 	edges = getEdges(G)
-	print(edges)
+	level = 1
+	"""Добавляем пустые списки каждому ребру,
+	   в этих списках будут храниться вершины,
+	   инцидентные рёбрам.
+	"""
+	for k, v in edges.items():
+		Tree[v[0]] = []
+		Tree[v[1]] = []
+	
+	for k, v in edges.items():
+		if not in_dictionary(levels,v[0]):
+			if in_dictionary(levels,v[1]):
+				levels[v[0]] = levels[v[1]]
+				Tree[v[0]].append(v[1])
+				Tree[v[1]].append(v[0])
+			else:
+				levels[v[0]] = level
+				levels[v[1]] = level
+				Tree[v[0]].append(v[1])
+				Tree[v[1]].append(v[0])
+				level += 1
+
+
 
 #Вернуть все рёбра и инцидентные им вершины
 def getEdges(G):
@@ -25,10 +53,10 @@ def getEdges(G):
 				tmp.append(i)
 				edges[G[i][j]] = tmp
 				tmp = []
-	return sort_1(edges)
+	return sort_dict(edges)
 
 #Сортировка по индексам словаря
-def sort_1(edges):
+def sort_dict(edges):
 	indexes = []
 	result = {}
 	for k, v in edges.items():
@@ -39,6 +67,14 @@ def sort_1(edges):
 			if i == k:
 				result[i] = v
 	return result
+
+#Функция для определения наличия индекса key в словаре dict
+def in_dictionary(dict, key):
+      try:
+      	d = dict[key]
+      	return True
+      except LookupError:
+      	return False
 
 if __name__ == "__main__":
 	main()
