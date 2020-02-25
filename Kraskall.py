@@ -50,8 +50,15 @@ def kraskal(G):
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
 				level += 1
-
-
+		else:
+			if levels[v[0]] < levels[v[1]]:
+				for key, value in levels.items():
+					if value == levels[v[0]]:
+						levels[v[0]] = levels[v[1]]
+			elif levels[v[0]] > levels[v[1]]:
+				for key, value in levels.items():
+					if value == levels[v[1]]:
+						levels[v[1]] = levels[v[0]]
 
 #Вернуть все рёбра и инцидентные им вершины
 def getEdges(G):
