@@ -39,6 +39,17 @@ def kraskal(G):
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
 				level += 1
+		elif not in_dictionary(levels, v[1]):
+			if in_dictionary(levels, v[0]):
+				levels[v[1]] = levels[v[0]]
+				Tree[v[0]].append(v[1])
+				Tree[v[1]].append(v[0])
+			else:
+				levels[v[0]] = level
+				levels[v[1]] = level
+				Tree[v[0]].append(v[1])
+				Tree[v[1]].append(v[0])
+				level += 1
 
 
 
