@@ -2,6 +2,8 @@
 	Алгоритм Краскала для нахождения минимального остовного дерева.
 """
 
+import sort
+
 def main():
 	G = [[0,0,0,1,4,0],
 	     [0,0,11,0,3,0],
@@ -23,9 +25,20 @@ def getEdges(G):
 				tmp.append(i)
 				edges[G[i][j]] = tmp
 				tmp = []
-	return edges
+	return sort_1(edges)
 
-
+#Сортировка по индексам словаря
+def sort_1(edges):
+	indexes = []
+	result = {}
+	for k, v in edges.items():
+		indexes.append(k)
+	sort.merge_sort(indexes)
+	for i in indexes:
+		for k, v in edges.items():
+			if i == k:
+				result[i] = v
+	return result
 
 if __name__ == "__main__":
 	main()
