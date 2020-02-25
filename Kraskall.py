@@ -1,5 +1,6 @@
 """
 	Алгоритм Краскала для нахождения минимального остовного дерева.
+	Остовное дерево возвращается в виде списков смежности.
 """
 
 import sort
@@ -12,7 +13,8 @@ def main():
 	     [4,3,0,15,0,0],
 	     [0,0,2,0,0,0]]
 
-	kraskal(G)
+	ostov_tree = kraskal(G)
+	print(ostov_tree)
 
 def kraskal(G):
 	Tree = {}
@@ -52,13 +54,20 @@ def kraskal(G):
 				level += 1
 		else:
 			if levels[v[0]] < levels[v[1]]:
+				n = levels[v[0]]
 				for key, value in levels.items():
-					if value == levels[v[0]]:
-						levels[v[0]] = levels[v[1]]
+					if value == n:
+						levels[key] = levels[v[1]]
+				Tree[v[0]].append(v[1])
+				Tree[v[1]].append(v[0])
 			elif levels[v[0]] > levels[v[1]]:
+				n = levels[v[1]]
 				for key, value in levels.items():
-					if value == levels[v[1]]:
-						levels[v[1]] = levels[v[0]]
+					if value == n:
+						levels[key] = levels[v[0]]
+				Tree[v[1]].append(v[0])
+				Tree[v[0]].append(v[1])
+	return Tree					
 
 #Вернуть все рёбра и инцидентные им вершины
 def getEdges(G):
@@ -79,6 +88,7 @@ def sort_dict(edges):
 	result = {}
 	for k, v in edges.items():
 		indexes.append(k)
+	#Сортировка слиянием (код в файле sort.py)
 	sort.merge_sort(indexes)
 	for i in indexes:
 		for k, v in edges.items():
