@@ -77,10 +77,10 @@ def merge(A:list, B:list):
 		n += 1
 	return C
 
-def hoar_sort():
+def hoar_sort(A):
 	"""Сортировка Тони Хоара(Quick Sort)
 	"""
-	if len(A) <= 1
+	if len(A) <= 1:
 		return
 	L = [] 
 	M = [] 
