@@ -21,6 +21,7 @@ def kraskal(G):
 	levels = {}
 	edges = getEdges(G)
 	level = 1
+	sum_of_weight = 0
 	"""Добавляем пустые списки каждому ребру,
 	   в этих списках будут храниться вершины,
 	   инцидентные рёбрам.
@@ -35,22 +36,26 @@ def kraskal(G):
 				levels[v[0]] = levels[v[1]]
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
+				sum_of_weight += k
 			else:
 				levels[v[0]] = level
 				levels[v[1]] = level
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
+				sum_of_weight += k
 				level += 1
 		elif not in_dictionary(levels, v[1]):
 			if in_dictionary(levels, v[0]):
 				levels[v[1]] = levels[v[0]]
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
+				sum_of_weight += k
 			else:
 				levels[v[0]] = level
 				levels[v[1]] = level
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
+				sum_of_weight += k
 				level += 1
 		else:
 			if levels[v[0]] < levels[v[1]]:
@@ -60,6 +65,7 @@ def kraskal(G):
 						levels[key] = levels[v[1]]
 				Tree[v[0]].append(v[1])
 				Tree[v[1]].append(v[0])
+				sum_of_weight += k
 			elif levels[v[0]] > levels[v[1]]:
 				n = levels[v[1]]
 				for key, value in levels.items():
@@ -67,6 +73,8 @@ def kraskal(G):
 						levels[key] = levels[v[0]]
 				Tree[v[1]].append(v[0])
 				Tree[v[0]].append(v[1])
+				sum_of_weight += k
+	print("sum of weight = " + str(sum_of_weight))
 	return Tree					
 
 #Вернуть все рёбра и инцидентные им вершины
