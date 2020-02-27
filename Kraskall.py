@@ -16,6 +16,7 @@ def main():
 	ostov_tree = kraskal(G)
 	print(ostov_tree)
 
+#Алгоритм Краскала
 def kraskal(G):
 	Tree = {}
 	levels = {}
