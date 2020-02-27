@@ -1,5 +1,6 @@
 """
 	Алгоритм Прима для поиска минимального остовного дерева.
+	Остовное дерево возвращается в виде списков смежности.
 """
 
 def main():
@@ -8,7 +9,11 @@ def main():
 	     [7,3,0,3,5],
 	     [0,2,3,0,4],
 	     [0,0,5,4,0]]
-	print(Prim(G))
+
+	ostov_tree_edges = Prim(G)
+	ostov_tree = build_tree(G, ostov_tree_edges)
+	print(ostov_tree)
+
 
 #Алгоритм Прима
 def Prim(G):
@@ -29,7 +34,6 @@ def Prim(G):
 				heap[edge] = G[i][j]
 		while 1 == 1:
 			minEdge = getMinEdge(heap)
-			print(minEdge)
 			if S[int(minEdge[0])] == 1 and S[int(minEdge[1])] == 1:
 				heap.pop(minEdge)
 			else:
@@ -51,10 +55,26 @@ def Prim(G):
 				counter += 1
 		if counter == len(S):
 			break
-	return result	
+	return result
 
+
+#Построение минимального остовного дерева
+def build_tree(G, ostov_tree_edges):
+	ostov_tree = {}
+	#Подготовим словарь всех вершин
+	for i in range(0, len(G)):
+		ostov_tree[i] = []
+
+	for i in range(0, len(G)):
+		for k, v in ostov_tree_edges.items():
+			if int(k[0]) == i:
+				ostov_tree[i].append(k[1])
+		for k, v in ostov_tree_edges.items():
+			if int(k[1]) == i:
+				ostov_tree[i].append(k[0])
+	return ostov_tree
 	
-
+	
 #Получение минимального веса среди рёбер (возвращаются вершины, инцидентные данному ребру)
 def getMinEdge(dict):
 	min = 0
