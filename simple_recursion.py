@@ -14,3 +14,17 @@ def rec(a,b):
 	if a > b:
 		print(a)
 		rec(a-1, b)
+
+def akkerman(m, n):
+	"""
+	Функция Аккермана A(m,n).
+	Даны два целых неотрицательных числа m и n, каждое в отдельной строке. Выведите A(m,n).
+
+	"""
+	if m == 0:
+		return n + 1
+	if m > 0 and n == 0:
+		return akkerman(m-1,1)
+	if m > 0 and n > 0:
+		return akkerman(m - 1, akkerman(m, n - 1))
+
