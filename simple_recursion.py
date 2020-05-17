@@ -56,3 +56,14 @@ def split(n):
 		return
 	split(n//10)
 	print(n%10)
+
+def sumOfNums(n):
+	"""Сумма цифр числа"""
+	if n == 0:
+		return n
+	return n%10 + sumOfNums(n//10)
+
+print(sumOfNums(222))
+
+
+
