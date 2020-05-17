@@ -28,3 +28,17 @@ def akkerman(m, n):
 	if m > 0 and n > 0:
 		return akkerman(m - 1, akkerman(m, n - 1))
 
+def dv(n,k):
+	"""
+	Дано натуральное число N. 
+	Выведите слово YES, если число N является точной 
+	степенью двойки, или слово NO в противном случае.
+	
+	Операцией возведения в степень пользоваться нельзя!
+	"""
+	if n == k:
+		return "Yes"
+	if n < k:
+		return "No"
+	else:
+		return dv(n,2*k)
