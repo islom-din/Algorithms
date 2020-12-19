@@ -76,6 +76,7 @@ def merge(A:list, B:list):
 		k += 1
 		n += 1
 	return C
+	
 
 def hoar_sort(A):
 	"""Сортировка Тони Хоара(Quick Sort)
